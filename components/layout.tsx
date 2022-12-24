@@ -15,9 +15,10 @@ export default function Layout({ children }: any) {
             className="flex flex-col bg-base-300 min-h-screen gap-8"
             data-theme={theme}
         >
-            <div className="grow">
+            <div className="fixed h-full w-full" style={{background: "linear-gradient(45deg,#5ccefa,#5ccefa 20%,#f6a8b7 20%,#f6a8b7 40%,#fff 40%,#fff 60%,#f6a8b7 60%,#f6a8b7 80%,#5ccefa 80%,#5ccefa)"}} />
+            <div className="grow z-10">
                 <div className="p-2 md:p-5 lg:px-6 2xl:px-80">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center rounded-2xl p-5 bg-base-100 shadow-xl">
                         <p className="text-4xl place-self-center">
                             The Trans Fediverse
                         </p>

@@ -3,41 +3,42 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Prisma } from '@prisma/client'
 import prismac from '../../../lib/prisma'
 
+export async function testURI(instanceURI: string) {
+    const init = {headers: { 'Content-Type': 'application/json' }}
+    const verifyURI = "https://" + instanceURI + "/api/v1/instance"
+    try {
+        const fetchingData = await fetch(verifyURI, init)
+        return await fetchingData.json()
+    }catch (err){
+        return await getMeta(instanceURI);
+    }
+}
+
+async function getMeta(instanceURI: string) {
+    const init = {method: 'POST', headers: { 'Content-Type': 'application/json' }}
+    const verifyURI = "https://" + instanceURI + "/api/meta"
+    try {
+        const fetchingData = await fetch(verifyURI, init)
+        const data = await fetchingData.json()
+        return {
+            title: data.name,
+            thumbnail: data.bannerUrl,
+            description: data.description,
+            registrations: !data.disableRegistrations,
+            approval_required: false,
+            stats: {
+                // TODO: Source this from nodeinfo
+                user_count: 0,
+            }
+        }
+    }catch (err){
+        return false
+    }
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== 'GET') {
         return res.status(405).json({ message: 'Invalid API Method'})
-    }
-    
-    async function testURI(instanceURI: string) {
-        const init = {headers: { 'Content-Type': 'application/json' }}
-        const verifyURI = "https://" + instanceURI + "/api/v1/instance"
-        try {
-            const fetchingData = await fetch(verifyURI, init)
-            return await fetchingData.json()
-        }catch (err){
-            return await getMeta(instanceURI);
-        }
-    }
-
-    async function getMeta(instanceURI: string) {
-        const init = {method: 'POST', headers: { 'Content-Type': 'application/json' }}
-        const verifyURI = "https://" + instanceURI + "/api/meta"
-        try {
-            const fetchingData = await fetch(verifyURI, init)
-            const data = await fetchingData.json()
-            return {
-                title: data.name,
-                thumbnail: data.bannerUrl,
-                description: data.description,
-                registrations: !data.disableRegistrations,
-                approval_required: false,
-                stats: {
-                    user_count: 0,
-                }
-            }
-        }catch (err){
-            return false
-        }
     }
 
     const allInstances = await prismac.instances.findMany()

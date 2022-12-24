@@ -212,8 +212,8 @@ const AddInstance: NextPage = () => {
                                         />
                                         <span className="ml-4 text-base">
                                             You agree to allow TransFediverse to
-                                            scrape your instance's "nodeinfo" and
-                                            "/api/v1/instance" endpoints for up-to-date
+                                            scrape your instance's "meta" or
+                                            "instance" endpoints for up-to-date
                                             information on your instance. We
                                             will not collect any other data from
                                             your instance.
