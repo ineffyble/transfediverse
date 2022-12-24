@@ -15,6 +15,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             const fetchingData = await fetch(verifyURI, init)
             return await fetchingData.json()
         }catch (err){
+            return await getMeta(instanceURI);
+        }
+    }
+
+    async function getMeta(instanceURI: string) {
+        const init = {method: 'POST', headers: { 'Content-Type': 'application/json' }}
+        const verifyURI = "https://" + instanceURI + "/api/meta"
+        try {
+            const fetchingData = await fetch(verifyURI, init)
+            const data = await fetchingData.json()
+            return {
+                title: data.name,
+                thumbnail: data.bannerUrl,
+                description: data.description,
+                registrations: !data.disableRegistrations,
+                approval_required: false,
+                stats: {
+                    user_count: 0,
+                }
+            }
+        }catch (err){
             return false
         }
     }

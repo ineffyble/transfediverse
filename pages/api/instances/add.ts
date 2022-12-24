@@ -53,7 +53,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 data: { verified: false },
             })
 
-            const BASE_URL: string = 'https://cyberfurz.social'
+            const BASE_URL: string = 'https://social.effy.space'
             const client = generator(
                 'mastodon',
                 BASE_URL,
@@ -64,7 +64,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 cachedata.contact_account.username +
                 '@' +
                 instanceData.uri +
-                ' Hi there someone is attempting to register your instance on FurryFediverse, if this is you. Please click this link to finish the registation: https://furryfediverse.org/api/instances/verify/' +
+                ' Hi there someone is attempting to register your instance on TransFediverse, if this is you. Please click this link to finish the registation: https://transfediverse.org/api/instances/verify/' +
                 savedInstance.api_key
             res.status(200).json({
                 message:

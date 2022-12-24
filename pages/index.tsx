@@ -49,7 +49,7 @@ const Home: NextPage = ({ general, niche }: any) => {
     return (
         <div>
             <Head>
-                <title>The Furry Fediverse</title>
+                <title>The Trans Fediverse</title>
                 <link
                     rel="icon"
                     href="/favicon.ico"
@@ -60,25 +60,28 @@ const Home: NextPage = ({ general, niche }: any) => {
                 <div className="card bg-base-100 shadow-xl">
                     <div className="card-body">
                         <h2 className="text-2xl card-title">
-                            What is the Furry Fediverse?
+                            What is the Fediverse?
                         </h2>
                         <p>
-                            We are a collection of furry instances on the
-                            Fediverse, which is just a fancy way of saying we
-                            are a bunch of servers that federate together,
-                            allowing furries to join the wider Fediverse. To
-                            ease the confusion, Fediverse just means a
-                            collection of servers that all communicate with each
-                            other. Mastodon, Pleroma, Pixelfed, and more are all
-                            pieces of software that speak Activity Pub, which is
-                            the protocol the Fediverse runs on.
+                            The "fediverse" is a decentralised social media network
+                            made up of many servers running different software that
+                            all talk to each other.
+
+                            Examples of this software include Mastodon, Misskey,
+                            Pleroma, and many more.
+
+                            This site is a hub of instances (servers) on the
+                            fediverse that are focused on trans, gender diverse,
+                            and non-binary communities, as well as instances that
+                            are welcoming and friendly to trans and gender diverse
+                            people.
                         </p>
                         <p>
                             There is no ownership of the wider Fediverse, just
                             instances. All instances are operated by real people
                             and not faceless companies (or at least the ones
                             listed on this site). Which means you are moderated
-                            by other real furries and server costs are managed
+                            by other real people and server costs are managed
                             by your instance admins. Or if you are nerdy enough,
                             you can host your own and federate with the rest of
                             us!
@@ -196,7 +199,7 @@ const Home: NextPage = ({ general, niche }: any) => {
                         <ul className="tabs w-full grid grid-cols-2">
                             <div
                                 className="tooltip tooltip-primary w-full"
-                                data-tip="Instances open to furries of any kind with no specific topic"
+                                data-tip="Instances specifically focused on trans & gender diverse people"
                             >
                                 <li
                                     key={0}
@@ -205,12 +208,12 @@ const Home: NextPage = ({ general, niche }: any) => {
                                     }`}
                                     onClick={() => setActive(0)}
                                 >
-                                    General Instances
+                                    Trans Focused
                                 </li>
                             </div>
                             <div
                                 className="tooltip tooltip-primary w-full"
-                                data-tip="Furry friendly instances with a focus on one or more topics"
+                                data-tip="Instances that are friendly to trans & gender diverse people"
                             >
                                 <li
                                     key={1}
@@ -219,7 +222,7 @@ const Home: NextPage = ({ general, niche }: any) => {
                                     }`}
                                     onClick={() => setActive(1)}
                                 >
-                                    Focused Instances
+                                    Trans Friendly
                                 </li>
                             </div>
                         </ul>
@@ -236,115 +239,6 @@ const Home: NextPage = ({ general, niche }: any) => {
                                 <div
                                     className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-min`}
                                     ref={generalDiv}
-                                >
-                                    {general.map(
-                                        (data: {
-                                            id: string
-                                            title: any
-                                            thumbnail: any
-                                            description: any
-                                            short_description: any
-                                            registrations: any
-                                            approval_required: any
-                                            uri: any
-                                            user_count: any
-                                            nsfwflag: any
-                                        }) => (
-                                            <div
-                                                key={data.id}
-                                                className="card card-compact bg-base-300 shadow-xl"
-                                            >
-                                                <figure>
-                                                    <ReactImageFallback
-                                                        src={data.thumbnail}
-                                                        fallbackImage="./img/fedi_placeholder.png"
-                                                        initialImage="./img/fedi_placeholder.png"
-                                                        className="max-h-52 w-full object-cover rounded-md pointer-events-none"
-                                                        alt={data.title}
-                                                        onLoad={() =>
-                                                            updateVariants()
-                                                        }
-                                                    />
-                                                </figure>
-                                                <div className="card-body">
-                                                    <h2 className="card-title text-2xl text-center self-center">
-                                                        {data.title}
-                                                    </h2>
-                                                    <div className="divider my-0"></div>
-                                                    <p className="text-base">
-                                                        {data.short_description !=
-                                                            'null' &&
-                                                        data.short_description
-                                                            .length > 0
-                                                            ? data.short_description.replace(
-                                                                  /(<([^>]+)>)/gi,
-                                                                  ''
-                                                              )
-                                                            : data.description !=
-                                                                  'null' &&
-                                                              data.description
-                                                                  .length > 0
-                                                            ? data.description.replace(
-                                                                  /(<([^>]+)>)/gi,
-                                                                  ''
-                                                              )
-                                                            : 'No description'}
-                                                    </p>
-                                                    <div className="divider my-0"></div>
-                                                    <div className="card-actions justify-evenly">
-                                                        <div className="text-lg w-min italic basis-full flex flex-rows items-center justify-center">
-                                                            <i className="fa-solid fa-key mr-4"></i>
-                                                            <div className="flex flex-wrap flex-rows w-min justify-center">
-                                                                <span className="whitespace-nowrap w-min">
-                                                                    {data.registrations
-                                                                        ? 'Registrations Open'
-                                                                        : 'Registrations Closed'}
-                                                                </span>
-                                                                <span className="whitespace-nowrap w-min">
-                                                                    {data.approval_required
-                                                                        ? 'with Approval Required'
-                                                                        : ''}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            className="tooltip text-lg"
-                                                            data-tip="Members"
-                                                        >
-                                                            <i className="fa-solid fa-users"></i>{' '}
-                                                            {data.user_count}
-                                                        </div>
-                                                        <div
-                                                            className="tooltip text-lg"
-                                                            data-tip="Content Rules"
-                                                        >
-                                                            <i className="fa-solid fa-user-shield"></i>{' '}
-                                                            {data.nsfwflag}
-                                                        </div>
-                                                        <a
-                                                            href={
-                                                                data.uri.includes(
-                                                                    'https'
-                                                                )
-                                                                    ? data.uri
-                                                                    : 'https://' +
-                                                                      data.uri
-                                                            }
-                                                            className="btn btn-primary normal-case text-xl w-full mt-2"
-                                                            target="_blank"
-                                                            rel="noreferrer"
-                                                        >
-                                                            Visit Instance
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    )}
-                                </div>
-                                <div
-                                    className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-min`}
-                                    ref={nicheDiv}
                                 >
                                     {niche.map(
                                         (data: {
@@ -416,13 +310,127 @@ const Home: NextPage = ({ general, niche }: any) => {
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <div
+                                                        {data.user_count > 0 && (
+                                                            <div
                                                             className="tooltip text-lg"
                                                             data-tip="Members"
+                                                            >
+                                                                <i className="fa-solid fa-users"></i>{' '}
+                                                                {data.user_count}
+                                                            </div>
+                                                        )}
+                                                        <div
+                                                            className="tooltip text-lg"
+                                                            data-tip="Content Rules"
                                                         >
-                                                            <i className="fa-solid fa-users"></i>{' '}
-                                                            {data.user_count}
+                                                            <i className="fa-solid fa-user-shield"></i>{' '}
+                                                            {data.nsfwflag}
                                                         </div>
+                                                        <a
+                                                            href={
+                                                                data.uri.includes(
+                                                                    'https'
+                                                                )
+                                                                    ? data.uri
+                                                                    : 'https://' +
+                                                                      data.uri
+                                                            }
+                                                            className="btn btn-primary normal-case text-xl w-full mt-2"
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                        >
+                                                            Visit Instance
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                                <div
+                                    className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-min`}
+                                    ref={nicheDiv}
+                                >
+                                    {general.map(
+                                        (data: {
+                                            id: string
+                                            title: any
+                                            thumbnail: any
+                                            description: any
+                                            short_description: any
+                                            registrations: any
+                                            approval_required: any
+                                            uri: any
+                                            user_count: any
+                                            nsfwflag: any
+                                        }) => (
+                                            <div
+                                                key={data.id}
+                                                className="card card-compact bg-base-300 shadow-xl"
+                                            >
+                                                <figure>
+                                                    <ReactImageFallback
+                                                        src={data.thumbnail}
+                                                        fallbackImage="./img/fedi_placeholder.png"
+                                                        initialImage="./img/fedi_placeholder.png"
+                                                        className="max-h-52 w-full object-cover rounded-md pointer-events-none"
+                                                        alt={data.title}
+                                                        onLoad={() =>
+                                                            updateVariants()
+                                                        }
+                                                    />
+                                                </figure>
+                                                <div className="card-body">
+                                                    <h2 className="card-title text-2xl text-center self-center">
+                                                        {data.title}
+                                                    </h2>
+                                                    <div className="divider my-0"></div>
+                                                    <p className="text-base">
+                                                        {data.short_description !=
+                                                            'null' &&
+                                                        data.short_description
+                                                            .length > 0
+                                                            ? data.short_description.replace(
+                                                                  /(<([^>]+)>)/gi,
+                                                                  ''
+                                                              )
+                                                            : data.description !=
+                                                                  'null' &&
+                                                              data.description
+                                                                  .length > 0
+                                                            ? data.description.replace(
+                                                                  /(<([^>]+)>)/gi,
+                                                                  ''
+                                                              )
+                                                            : 'No description'}
+                                                    </p>
+                                                    <div className="divider my-0"></div>
+                                                    <div className="card-actions justify-evenly">
+                                                        <div className="text-lg w-min italic basis-full flex flex-rows items-center justify-center">
+                                                            <i className="fa-solid fa-key mr-4"></i>
+                                                            <div className="flex flex-wrap flex-rows w-min justify-center">
+                                                                <span className="whitespace-nowrap w-min">
+                                                                    {data.registrations
+                                                                        ? 'Registrations Open'
+                                                                        : 'Registrations Closed'}
+                                                                </span>
+                                                                <span className="whitespace-nowrap w-min">
+                                                                    {data.approval_required
+                                                                        ? 'with Approval Required'
+                                                                        : ''}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {data.user_count > 0 && (
+                                                            <div
+                                                            className="tooltip text-lg"
+                                                            data-tip="Members"
+                                                            >
+                                                                <i className="fa-solid fa-users"></i>{' '}
+                                                                {data.user_count}
+                                                            </div>
+                                                        )}
+
                                                         <div
                                                             className="tooltip text-lg"
                                                             data-tip="Content Rules"

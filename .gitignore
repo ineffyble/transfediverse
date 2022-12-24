@@ -43,3 +43,6 @@ next-env.d.ts
 #yarn
 /.yarn/
 .yarnrc.yml
+
+# db
+db.sqlite3

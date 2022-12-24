@@ -54,7 +54,7 @@ const AddInstance: NextPage = () => {
     return (
         <main>
             <Head>
-                <title>The Furry Fediverse - Add Server</title>
+                <title>The Trans Fediverse - Add Server</title>
                 <link
                     rel="icon"
                     href="/favicon.ico"
@@ -163,8 +163,8 @@ const AddInstance: NextPage = () => {
                                             })
                                         }
                                     >
-                                        <option value="general">General</option>
-                                        <option value="niche">Focused</option>
+                                        <option value="general">Trans Focused</option>
+                                        <option value="niche">Trans Friendly</option>
                                     </select>
                                 </div>
                                 <div>
@@ -211,9 +211,9 @@ const AddInstance: NextPage = () => {
                                             required
                                         />
                                         <span className="ml-4 text-base">
-                                            You agree to allow FurryFediverse to
-                                            scrape your instance's endpoint
-                                            "/api/v1/instance" for up-to-date
+                                            You agree to allow TransFediverse to
+                                            scrape your instance's "nodeinfo" and
+                                            "/api/v1/instance" endpoints for up-to-date
                                             information on your instance. We
                                             will not collect any other data from
                                             your instance.
@@ -249,10 +249,9 @@ const AddInstance: NextPage = () => {
                                             required
                                         />
                                         <span className="ml-4 text-base">
-                                            Your instance actively moderates
-                                            against hate speech, racism,
-                                            homophobia, and cultures a safe
-                                            community.
+                                            Your instance has actively enforced
+                                            policies against transphobia, including
+                                            so-called "gender critical" rhetoric.
                                         </span>
                                     </label>
                                 </div>

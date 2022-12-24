@@ -2,18 +2,8 @@ import { useState } from 'react'
 
 const maintainers = [
     {
-        user: 'hack13',
-        domain: 'cyberfurz.social',
-    },
-
-    {
-        user: 'brodokk',
-        domain: 'furry.engineer',
-    },
-
-    {
-        user: 'oric',
-        domain: 'macrofurs.social',
+        user: 'effy',
+        domain: 'effy.space',
     },
 ]
 
@@ -29,7 +19,7 @@ export default function Layout({ children }: any) {
                 <div className="p-2 md:p-5 lg:px-6 2xl:px-80">
                     <div className="flex justify-between items-center">
                         <p className="text-4xl place-self-center">
-                            The Furry Fediverse
+                            The Trans Fediverse
                         </p>
                         <div className="flex flex-nowrap justify-evenly items-center gap-2">
                             <i className="fa-solid fa-moon"></i>
@@ -74,7 +64,7 @@ export default function Layout({ children }: any) {
                     Find us here:
                     <div className="flex items-center flex-row gap-4">
                         <a
-                            href="https://github.com/CyberFurz/furryfediverse-site"
+                            href="https://github.com/ineffyble/transfediverse"
                             className="link text-6xl no-underline"
                             target="_blank"
                             rel="noreferrer"
@@ -83,7 +73,7 @@ export default function Layout({ children }: any) {
                         </a>
                         <a
                             rel="me noreferrer"
-                            href="https://cyberfurz.social/@FurryFediverse"
+                            href="https://social.effy.space/@effy"
                             className="link text-6xl no-underline"
                             target="_blank"
                         >
