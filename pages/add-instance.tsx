@@ -163,8 +163,8 @@ const AddInstance: NextPage = () => {
                                             })
                                         }
                                     >
-                                        <option value="general">Trans Focused</option>
-                                        <option value="niche">Trans Friendly</option>
+                                        <option value="niche">Trans Focused</option>
+                                        <option value="general">Trans Friendly</option>
                                     </select>
                                 </div>
                                 <div>
