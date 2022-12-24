@@ -1,4 +1,4 @@
-# Welcome to [TtransFediverse](https://transfediverse.org)
+# Welcome to [TransFediverse](https://transfediverse.org)
 
 This is the official repository of the site that is used to help promote the Trans Fediverse.
 
