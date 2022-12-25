@@ -74,7 +74,7 @@ export default function Layout({ children }: any) {
                         </a>
                         <a
                             rel="me noreferrer"
-                            href="https://social.effy.space/@effy"
+                            href="https://blahaj.zone/@TransFediverse"
                             className="link text-6xl no-underline"
                             target="_blank"
                         >
