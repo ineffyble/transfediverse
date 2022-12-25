@@ -42,33 +42,58 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             })
 
             if (cachedata.contact_account?.username) {
-                const BASE_URL: string = 'https://social.effy.space'
-                const client = generator(
-                    'mastodon',
-                    BASE_URL,
-                    process.env.ACCESS_TOKEN
-                )
+                const BASE_URL: string = 'https://blahaj.zone'
                 const toot =
-                    '@' +
-                    cachedata.contact_account.username +
-                    '@' +
-                    instanceData.uri +
-                    ' Hi there someone is attempting to register your instance on TransFediverse, if this is you. Please click this link to finish the registation: https://transfediverse.org/api/instances/verify/' +
-                    savedInstance.api_key
+                '@' +
+                cachedata.contact_account.username +
+                '@' +
+                instanceData.uri +
+                ' Hi there! Someone is attempting to register your instance on https://transfediverse.org. If this is you, please click this link to finish the registation: https://transfediverse.org/api/instances/verify/' +
+                savedInstance.api_key
+                if (process.env.ACCOUNT_IS_MISSKEY) {
+                    const userReq = await fetch(`${BASE_URL}/api/users/search-by-username-and-host`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+                        },
+                        body: JSON.stringify({
+                            username: cachedata.contact_account.username,
+                            host: instanceData.uri
+                        })
+                    });
+                    const userFind = await userReq.json();
+                    await fetch(`${BASE_URL}/api/notes/create`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+                        },
+                        body: JSON.stringify({
+                            text: toot,
+                            visibility: 'specified',
+                            visibleUserIds: [userFind[0].id]
+                        })
+                    });
+                } else {
+                    const client = generator(
+                        'mastodon',
+                        BASE_URL,
+                        process.env.ACCESS_TOKEN
+                    )
+                    client
+                    .postStatus(toot, { visibility: 'direct' })
+                    .then((res: Response<Entity.Status>) => {
+                        console.log(res.data)
+                    })
+                }
                 res.status(200).json({
                     message:
                         'Added instance successfully, your instance admin account needs to be verfied! Check your DMs!',
                     type: 'success',
                 })
-                client
-                    .postStatus(toot, { visibility: 'direct' })
-                    .then((res: Response<Entity.Status>) => {
-                        console.log(res.data)
-                    })
             } else {
                 res.status(200).json({
                     message:
-                        'Added instance successfully, but you will need to manually verify it. Please message @effy@effy.space from an admin account.',
+                        'Added instance successfully, but Misskey requires manual verification. Please message @TransFediverse@blahaj.zone from an admin account.',
                     type: 'success',
                 })
             }
