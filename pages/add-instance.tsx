@@ -42,7 +42,7 @@ const AddInstance: NextPage = () => {
 
     const handleFormSubmit = async (data: FormData) => {
         try {
-            data.type = data.type != '' ? data.type : 'general'
+            data.type = data.type != '' ? data.type : 'niche'
             data.uri = data.uri.replace(/^https?:\/\//, '')
             data.nsfwflag = data.nsfwflag != '' ? data.nsfwflag : 'sfw'
             create(data)
