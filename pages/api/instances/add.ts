@@ -51,7 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 ' Hi there! Someone is attempting to register your instance on https://transfediverse.org. If this is you, please click this link to finish the registation: https://transfediverse.org/api/instances/verify/' +
                 savedInstance.api_key
                 if (process.env.ACCOUNT_IS_MISSKEY) {
-                    const userReq = await fetch(`${BASE_URL}/api/users/search-by-username-and-host`, {
+                    const userReq = await fetch(`${BASE_URL}/api/users/show`, {
                         method: 'POST',
                         headers: {
                             Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
@@ -70,7 +70,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                         body: JSON.stringify({
                             text: toot,
                             visibility: 'specified',
-                            visibleUserIds: [userFind[0].id]
+                            visibleUserIds: [userFind.id]
                         })
                     });
                 } else {
@@ -96,6 +96,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                         'Added instance successfully, but Misskey requires manual verification. Please message @TransFediverse@blahaj.zone from an admin account.',
                     type: 'success',
                 })
+            } else {
+                console.log(err);
+                res.status(500).json({ message: 'Something went wrong', type: 'error' })
             }
 
 
