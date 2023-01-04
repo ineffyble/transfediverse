@@ -199,7 +199,7 @@ const Home: NextPage = ({ general, niche }: any) => {
                         <ul className='tabs w-full grid grid-cols-2'>
                             <div
                                 className='tooltip tooltip-primary w-full'
-                                data-tip='Instances open to furries of any kind with no specific topic'
+                                data-tip='Instances specifically focused on trans & gender diverse people'
                             >
                                 <li
                                     key={ 0 }
@@ -208,12 +208,12 @@ const Home: NextPage = ({ general, niche }: any) => {
                                     }` }
                                     onClick={ () => setActive(0) }
                                 >
-                                    General Instances
+                                    Trans Focused
                                 </li>
                             </div>
                             <div
                                 className='tooltip tooltip-primary w-full'
-                                data-tip='Furry friendly instances with a focus on one or more topics'
+                                data-tip='Instances that are friendly to trans & gender diverse people'
                             >
                                 <li
                                     key={ 1 }
@@ -222,7 +222,7 @@ const Home: NextPage = ({ general, niche }: any) => {
                                     }` }
                                     onClick={ () => setActive(1) }
                                 >
-                                    Focused Instances
+                                    Trans Friendly
                                 </li>
                             </div>
                         </ul>

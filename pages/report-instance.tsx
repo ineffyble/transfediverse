@@ -54,7 +54,7 @@ const ReportInstance: NextPage = ({ instances }: any) => {
     return (
         <main>
             <Head>
-                <title>The Furry Fediverse - Add Server</title>
+                <title>The Trans Fediverse - Add Server</title>
                 <link
                     rel='icon'
                     href='/favicon.ico'

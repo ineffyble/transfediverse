@@ -43,7 +43,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             })
 
             if (cachedata.contact_account?.username) {
-                const BASE_URL: string = 'https://blahaj.zone'
                 const toot =
                 '@' +
                 cachedata.contact_account.username +
@@ -55,7 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     const userReq = await fetch(`${BASE_URL}/api/users/show`, {
                         method: 'POST',
                         headers: {
-                            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+                            Authorization: `Bearer ${ACCESS_TOKEN}`
                         },
                         body: JSON.stringify({
                             username: cachedata.contact_account.username,

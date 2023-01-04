@@ -38,17 +38,41 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             const toot =
                 maintainerMentions +
                 reportData.uri + ' has been reported by ' + reportData.contact.split('@').join('[at]')
-            
-            res.status(200).json({
-                message:
-                    'Report received!' + JSON.stringify(toot),
-                type: 'success',
-            })
+            if (process.env.ACCOUNT_IS_MISSKEY) {
+                const userReq = await fetch(`${BASE_URL}/api/users/show`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${ACCESS_TOKEN}`
+                    },
+                    body: JSON.stringify({
+                        username: maintainers[0].user,
+                        host: maintainers[0].domain
+                    })
+                });
+                const userFind = await userReq.json();
+                await fetch(`${BASE_URL}/api/notes/create`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+                    },
+                    body: JSON.stringify({
+                        text: toot,
+                        visibility: 'specified',
+                        visibleUserIds: [userFind.id]
+                    })
+                });
+            } else {
             mastoClient
                 .postStatus(toot, { visibility: 'direct' })
                 .then((res: Response<Entity.Status>) => {
                     console.log(res.data)
                 })
+            }
+            res.status(200).json({
+                message:
+                    'Report received!' + JSON.stringify(toot),
+                type: 'success',
+            })
         } catch (err) {
             if (err instanceof Prisma.PrismaClientKnownRequestError) {
                 if (err.code === 'P2002') {
@@ -64,6 +88,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             } else if (err instanceof Prisma.PrismaClientValidationError) {
                 res.status(400).json({ message: err.message, type: 'error' })
+            } else {
+                console.log(err);
+                res.status(500).json({ message: 'Something went wrong', type: 'error' })
             }
         }
     } else if (req.method === 'GET') {

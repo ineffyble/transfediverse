@@ -3,17 +3,9 @@ import { IncomingHttpHeaders } from "http"
 
 export const maintainers = [
     {
-        user: 'hack13',
-        domain: 'cyberfurz.social',
-    },
-    {
-        user: 'brodokk',
-        domain: 'furry.engineer',
-    },
-    {
-        user: 'oric',
-        domain: 'macrofurs.social',
-    },
+        user: 'effy',
+        domain: 'effy.space',
+    }
 ]
 
 export async function verifyToken(client: PrismaClient, token: string) {

@@ -35,7 +35,7 @@ export default function Layout({ children }: any) {
             <footer className="footer py-6 px-4 sm:px-12 bg-neutral text-neutral-content flex justify-between items-center z-10">
                 <div>
                     <div className='flex flex-col gap-2'>
-                        <div>Maintened by:</div>
+                        <div>Maintained by:</div>
                         <div></div>
                         { maintainers.map(
                             (data: { user: string; domain: string }) => (
