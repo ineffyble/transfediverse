@@ -96,12 +96,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                         'Added instance successfully, but Misskey requires manual verification. Please message @TransFediverse@blahaj.zone from an admin account.',
                     type: 'success',
                 })
-            } else {
-                console.log(err);
-                res.status(500).json({ message: 'Something went wrong', type: 'error' })
             }
-
-
         } catch (err) {
             if (err instanceof Prisma.PrismaClientKnownRequestError) {
                 if (err.code === 'P2002') {
@@ -117,6 +112,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             } else if (err instanceof Prisma.PrismaClientValidationError) {
                 res.status(400).json({ message: err.message, type: 'error' })
+            } else {
+                console.log(err);
+                res.status(500).json({ message: 'Something went wrong', type: 'error' })
             }
         }
     }
