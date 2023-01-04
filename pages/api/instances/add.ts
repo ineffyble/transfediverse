@@ -1,11 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-const dotenv = require('dotenv')
-dotenv.config()
-import generator, { Entity, Response } from 'megalodon'
+import generator from 'megalodon'
 import { Prisma } from '@prisma/client'
 import prismac from '../../../lib/prisma'
 import { testURI } from './cache'
+import { ACCESS_TOKEN, BASE_URL } from "../../../lib/config"
+
+const dotenv = require('dotenv')
+dotenv.config()
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== 'POST') {
@@ -13,10 +15,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             .status(405)
             .json({ message: 'Invalid API Method', type: 'error' })
     }
-
+    
     const instanceData: { uri: string; type: string; nsfwflag: string } =
         req.body
-
     if ((await testURI(instanceData.uri)) == false) {
         res.status(400).json({ message: 'failed to verify URI', type: 'error' })
     } else {
@@ -34,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     },
                 },
             })
-
+            
             // Absolutely force the value to be false after creation!
             const unverifiedInstance = await prismac.instances.update({
                 where: { uri: instanceData.uri },
