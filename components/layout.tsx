@@ -11,7 +11,7 @@ export default function Layout({ children }: any) {
             data-theme={ theme }
         >
             <div className="fixed h-full w-full" style={{background: "linear-gradient(45deg,#5ccefa,#5ccefa 20%,#f6a8b7 20%,#f6a8b7 40%,#fff 40%,#fff 60%,#f6a8b7 60%,#f6a8b7 80%,#5ccefa 80%,#5ccefa)"}} />
-            <div className="grow z-10">
+            <div className="grow z-10 overflow-y-clip">
                 <div className="p-2 md:p-5 lg:px-6 2xl:px-80">
                     <div className="flex justify-between items-center rounded-2xl p-5 bg-base-100 shadow-xl">
                         <Link href='/'>
